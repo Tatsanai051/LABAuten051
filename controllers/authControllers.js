@@ -34,13 +34,13 @@ exports.login = async (req, res) => {
     const accessToken = jwt.sign(
       { userId: user._id, user_name: user.user_name },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "5m" }
+      { expiresIn: "1h" }
     );
     const refreshToken = jwt.sign(
       { userId: user._id, user_name: user.user_name },
       process.env.REFRESH_TOKEN_SECRET
     );
-    res.json({ accessToken, refreshToken });
+    res.json({ user,accessToken, refreshToken });
   } catch (err) {
     res.status(500).send(err.message);
   }
